@@ -23,24 +23,28 @@ The 16MB flash is partitioned as follows, there are 20KBs of space allocated as 
 | storage  | data | spiffs  | 0x5f0000 | 0xa10000 |
 
 ## Getting Started
-It is as easy as inheriting from the `application` class and overriding `on_create` and `on_update` methods. 
 
 Check out [example.cpp](src/example/example.cpp). It's a simple physics simulation application provided as a starting point and as an artificial load for testing.
 
 ![docs/example.gif](docs/example.gif?raw=true)
 
 ### 0. Load Images into [SPIFFS](https://randomnerdtutorials.com/esp32-vs-code-platformio-spiffs/) (first time only)
-To get the example up and running, first **build and upload the filesystem image**. This will mount the  ![`/data`](/data/) directory to the flash memory of the board.
+To get the example up and running, first **build and upload the filesystem image**. This will mount the [`/data`](/data/) directory to the flash memory of the board (read why we do this [here](https://randomnerdtutorials.com/esp32-vs-code-platformio-spiffs/)).
 
 ```
 platformio run --target buildfs --environment T-Display-S3
 platformio run --target uploadfs --environment T-Display-S3 
 ```
 
-### 1. Upload the example program
-The following command builds and runs whatever you had.
+### 1. Upload a program
+The following command builds and runs whatever you have locally to your board.
 ``` 
 platformio run --target upload
 ```
+
+### 2. Write your own! 
+To make your own project, inherit from the `application` class and override the `on_create` and `on_update` methods. 
+
+`on_create` runs once at startup and 
 
 
