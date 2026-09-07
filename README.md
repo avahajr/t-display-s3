@@ -8,9 +8,9 @@
  - Mounts the internal flash as a storage medium and makes it available to LVLG as the "F:" drive.
  - Maps hardware keys to an LVGL keypad input device with "Up", "Down" and "Enter" key events.
  - Provides battery voltage readings in millivolts with an API call.
- - Uses the latest version of LVGL. (v9.1.0)
+ - Uses the latest version of LVGL. (v9.5.0)
  
- **Partition Table**:
+ **Partition Table**
 
 The 16MB flash is partitioned as follows, there are 20KBs of space allocated as `nvs` key-value storage, an `otadata` partition, and two `app` partitions defined, 2.93MBs each so that OTA updates can be supported as well. Finally, 10.92MBs of space is allocated to the `storage` partition available to the user to work with.
 
@@ -25,12 +25,22 @@ The 16MB flash is partitioned as follows, there are 20KBs of space allocated as 
 ## Getting Started
 It is as easy as inheriting from the `application` class and overriding `on_create` and `on_update` methods. 
 
-Check out the [example.cpp](src/example/example.cpp) file, It's a simple physics simulation application provided to help as a starting point and as an artificial load for testing.
+Check out [example.cpp](src/example/example.cpp). It's a simple physics simulation application provided as a starting point and as an artificial load for testing.
 
 ![docs/example.gif](docs/example.gif?raw=true)
 
-**Note:** As mentioned, this example utilizes Espressif's [Storage API](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/storage/index.html), so if you're building from source don't forget to build and upload the filesystem image as well before the first use.
+### 0. Load Images into [SPIFFS](https://randomnerdtutorials.com/esp32-vs-code-platformio-spiffs/) (first time only)
+To get the example up and running, first **build and upload the filesystem image**. This will mount the  ![`/data`](/data/) directory to the flash memory of the board.
 
-## Try it out
+```
+platformio run --target buildfs --environment T-Display-S3
+platformio run --target uploadfs --environment T-Display-S3 
+```
 
-Got your board at hand? Download the latest [release](https://github.com/KamranAghlami/T-Display-S3/releases/latest) and flash online via [ESP Tool](https://espressif.github.io/esptool-js). Use the provided `offsets.json` file to specify which address to flash each bin file to.
+### 1. Upload the example program
+The following command builds and runs whatever you had.
+``` 
+platformio run --target upload
+```
+
+
