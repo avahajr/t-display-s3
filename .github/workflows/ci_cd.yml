@@ -49,7 +49,7 @@ jobs:
 
       - name: GitHubAssistantBot Preprocess
         id: preprocess_commits
-        if: success() || failure()
+        if: (success() || failure()) && secrets.ASSISTANT_BOT_KEY != ''
         run: |
           commits_json=$(cat <<EOL
           ${{toJson(github.event.commits)}}
@@ -59,7 +59,8 @@ jobs:
           echo "commits=$(echo "$commits_json" | jq -c '[.[] | {message: .message, url: .url}]' || echo "[]")" >> $GITHUB_OUTPUT
 
       - name: GitHubAssistantBot
-        if: success() || failure()
+        if: (success() || failure()) && secrets.ASSISTANT_BOT_KEY != ''
+        continue-on-error: true
         uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://node-red.geeken.me/github_assistant_bot'
