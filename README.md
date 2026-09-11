@@ -45,6 +45,5 @@ platformio run --target upload
 ### 2. Write your own! 
 To make your own project, inherit from the `application` class and override the `on_create` and `on_update` methods. 
 
-`on_create` runs once at startup and 
-
+The easiest way to do this is to just write something over `example.cpp`.
 
